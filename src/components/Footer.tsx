@@ -43,7 +43,7 @@ Button.displayName = "Button";
 
 // Form components
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // No additional properties needed
+  // This interface extends HTML input attributes without adding new properties
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -63,7 +63,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  // No additional properties needed
+  // This interface extends HTML textarea attributes without adding new properties
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -190,7 +190,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-16">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold tracking-tight text-foreground">
-              We'd Love to Hear From You!
+              We&apos;d Love to Hear From You!
             </h2>
             <p className="text-lg text-muted-foreground">
               Have suggestions or feature requests? Let us know!
