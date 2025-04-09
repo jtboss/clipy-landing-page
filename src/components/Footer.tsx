@@ -43,7 +43,8 @@ Button.displayName = "Button";
 
 // Form components
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // This interface extends HTML input attributes without adding new properties
+  // Required placeholder property to avoid empty interface error
+  placeholder?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -63,7 +64,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  // This interface extends HTML textarea attributes without adding new properties
+  // Required placeholder property to avoid empty interface error
+  placeholder?: string;
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
