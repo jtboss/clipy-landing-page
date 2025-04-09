@@ -22,14 +22,14 @@ const ProblemSolution: React.FC<ProblemSolutionProps> = ({ className }) => {
                 Tired of Losing Important Information? Let AI Help.
               </h2>
               <p className="text-lg text-muted-foreground">
-                Managing your clipboard shouldn't be a hassle. We've built a smart solution to organize and store everything you copy—automatically.
+                Managing your clipboard shouldn&apos;t be a hassle. We&apos;ve built a smart solution to organize and store everything you copy—automatically.
               </p>
             </div>
 
             <div className="bg-muted/30 rounded-lg p-6 border border-border">
-              <h3 className="text-xl font-semibold mb-3">The Problem</h3>
+              <h3 className="text-xl font-semibold mb-2">Frustrated By Your Clipboard&apos;s Limitations?</h3>
               <p className="text-muted-foreground">
-                You copy and paste throughout the day, but important bits of information are lost, overwritten, or hard to find when you need them most. Traditional clipboard managers just don't cut it.
+                Ever copied something important only to lose it when you copied something else? Clipy solves this common frustration.
               </p>
             </div>
 
@@ -39,7 +39,7 @@ const ProblemSolution: React.FC<ProblemSolutionProps> = ({ className }) => {
                 <div className="flex flex-col gap-1">
                   <p className="font-medium">Smart Organization</p>
                   <p className="text-muted-foreground text-sm">
-                    AI automatically categorizes your clips for easy retrieval
+                    Clipy&apos;s smart organization automatically categorizes your copied text, links, code, and more so you can easily find what you need.
                   </p>
                 </div>
               </div>

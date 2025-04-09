@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Search, Cloud, Layout, ArrowRight, Keyboard, TextCursor, Bookmark, Shield, ChevronUp, ChevronDown } from "lucide-react";
+import { Brain, Search, Cloud, Layout, Keyboard, TextCursor, Bookmark, Shield, ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "../lib/utils";
 
 interface KeyFeaturesProps {
@@ -110,7 +110,7 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ className }) => {
               Clipy Features That Will Change How You Work
             </h2>
             <p className="text-lg text-muted-foreground">
-              Discover how Clipy's powerful features help you stay organized, save time, and increase your productivity.
+              Discover how Clipy&apos;s powerful features help you stay organized, save time, and increase your productivity.
             </p>
           </motion.div>
         </div>

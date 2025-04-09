@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useId, useState, useRef } from "react";
-import { ArrowRight, Info, CheckCircle, AlertCircle, ChevronDown } from "lucide-react";
+import React, { useId, useState } from "react";
+import { ArrowRight, CheckCircle, AlertCircle, ChevronDown } from "lucide-react";
 import { cn } from "../lib/utils";
 
 interface SignUpCTAProps {
@@ -25,9 +25,6 @@ const SignUpCTA: React.FC<SignUpCTAProps> = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   
-  // Create a ref to scroll to the features section
-  const featuresRef = useRef<HTMLDivElement | null>(null);
-
   const scrollToFeatures = () => {
     // Find KeyFeatures component by ID
     const featuresSection = document.getElementById("key-features");
@@ -121,7 +118,7 @@ const SignUpCTA: React.FC<SignUpCTAProps> = ({ className }) => {
             </div>
             <h3 className="text-lg font-medium">Thanks for signing up!</h3>
             <p className="text-center text-muted-foreground">
-              You're on the list! You'll be notified when Clipy is available.
+              You&apos;re on the list! You&apos;ll be notified when Clipy is available.
             </p>
           </div>
         ) : (

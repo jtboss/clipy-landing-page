@@ -42,7 +42,9 @@ const Button = React.forwardRef<
 Button.displayName = "Button";
 
 // Form components
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  // No additional properties needed
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
@@ -60,7 +62,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  // No additional properties needed
+}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, ...props }, ref) => {
@@ -213,7 +217,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             {isSuccess ? (
               <div className="rounded-md bg-primary/10 p-6 text-center">
                 <h3 className="mb-2 text-lg font-medium">Thank you for your message!</h3>
-                <p className="text-muted-foreground">We'll get back to you as soon as possible.</p>
+                <p className="text-muted-foreground">We&apos;ll get back to you as soon as possible.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
