@@ -1,1 +1,0 @@
-# clipy-landing-page
