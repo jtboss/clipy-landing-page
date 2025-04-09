@@ -74,10 +74,9 @@ export async function POST(request: Request) {
         });
 
         // 2. Send notification to the owner/admin
-        // In production, replace this with your actual email address
         await resend.emails.send({
           from: 'Clipy <onboarding@resend.dev>',
-          to: 'owner@example.com', // Replace with your email
+          to: process.env.ADMIN_EMAIL || 'owner@example.com', // Use env variable or fallback
           subject: 'New Contact Form Submission',
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
