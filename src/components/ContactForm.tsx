@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitContactForm } from "../app/actions";
-import { Send, User, Mail, MessageSquare, Check, AlertCircle, Loader2 } from "lucide-react";
+import { Send, User, Mail, Check, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";
 
 type FormState = {
   name: string;
@@ -111,7 +111,8 @@ const ContactForm = () => {
           errors: { general: result.error || "Something went wrong. Please try again." },
         });
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Contact form error:", err);
       setFormStatus({
         status: "error",
         errors: { general: "Failed to send message. Please try again later." },
@@ -151,7 +152,7 @@ const ContactForm = () => {
                 </div>
                 <h3 className="text-xl font-semibold tracking-tight">Message Sent!</h3>
                 <p className="text-muted-foreground">
-                  Thank you for reaching out. We'll get back to you soon.
+                  Thank you for reaching out. We&apos;ll get back to you soon.
                 </p>
               </motion.div>
             ) : (

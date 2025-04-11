@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import ProblemSolution from "../src/components/ProblemSolution";
 import KeyFeatures from "../src/components/KeyFeatures";
 import SignUpCTA from "../src/components/SignUpCTA";

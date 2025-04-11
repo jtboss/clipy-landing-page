@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState, useId } from "react";
-import { ArrowRight, CheckCircle, Mail, User, Clock, Gift } from "lucide-react";
+import { ArrowRight, CheckCircle, Mail, User, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
-import Image from "next/image";
 
 interface FormState {
   name: string;
@@ -235,9 +234,9 @@ const SignUpCTA: React.FC<SignUpCTAProps> = ({ className }) => {
                   <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
                     <CheckCircle className="h-8 w-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-medium text-center">You're on the VIP list!</h3>
+                  <h3 className="text-xl font-medium text-center">You&apos;re on the VIP list!</h3>
                   <p className="text-center text-muted-foreground">
-                    Thanks for signing up! You'll be among the first to try Clipy.
+                    Thanks for signing up! You&apos;ll be among the first to try Clipy.
                   </p>
                   <motion.button
                     type="button"

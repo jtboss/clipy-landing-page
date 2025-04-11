@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Check, X, Clipboard, ArrowRight, Lightbulb, AlertTriangle, ArrowDown, CheckCircle } from "lucide-react";
+import { Check, X, Clipboard, Lightbulb, AlertTriangle, ArrowDown, CheckCircle } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -341,7 +341,7 @@ const ProblemSolution = () => {
                 <div className="font-medium">Limited to one item</div>
                 <div className="text-muted-foreground text-sm">
                   Your system clipboard only stores the last thing you copied, forcing you to go back and forth between windows.
-              </div>
+                </div>
               </motion.li>
 
               <motion.li 
@@ -364,7 +364,7 @@ const ProblemSolution = () => {
                 <div className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-full border border-destructive text-destructive">
                   <X className="h-3.5 w-3.5" />
                   </div>
-                <div className="font-medium">Doesn't persist after restarts</div>
+                <div className="font-medium">Doesn&apos;t persist after restarts</div>
                 <div className="text-muted-foreground text-sm">
                   If you restart your computer, everything in your clipboard is lost, even if it was important.
                 </div>
@@ -428,7 +428,7 @@ const ProblemSolution = () => {
                 </div>
                 <div className="font-medium">Unlimited clipboard history</div>
                 <div className="text-muted-foreground text-sm">
-                  Clipy stores everything you copy, creating a searchable history that's always available.
+                  Clipy stores everything you copy, creating a searchable history that&apos;s always available.
                 </div>
               </motion.li>
 
@@ -443,7 +443,7 @@ const ProblemSolution = () => {
                 </div>
                 <div className="font-medium">Powerful search capabilities</div>
                 <div className="text-muted-foreground text-sm">
-                  Instantly find what you're looking for with smart search that works across text, code, and images.
+                  Instantly find what you&apos;re looking for with smart search that works across text, code, and images.
                 </div>
               </motion.li>
 

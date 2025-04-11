@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { Monitor, Smartphone, Search, Clock, History, Share2, Key, ArrowRight, Check, MessageSquare, Clipboard } from "lucide-react";
+import { Monitor, Smartphone, Search, Clock, History, Share2, MessageSquare, Clipboard, Key, ArrowRight } from "lucide-react";
 
 const features = [
   {
@@ -55,9 +54,9 @@ const additionalFeatures = [
 ];
 
 const KeyFeatures = () => {
-  const [activeFeature, setActiveFeature] = useState("search");
+  const [activeFeature] = useState(features[0].id);
   
-  const activeFeatureData = features.find(f => f.id === activeFeature);
+  const activeFeatureObj = features.find(feature => feature.id === activeFeature);
 
   return (
     <section id="key-features" className="py-24 bg-gradient-to-b from-background via-background/50 to-background">

@@ -57,7 +57,7 @@ const ContactSection = () => {
                 <div className="p-4 rounded-lg border border-border bg-card/50">
                   <h4 className="font-medium mb-2">Feature Requests</h4>
                   <p className="text-muted-foreground text-sm">
-                    Have an idea that would make Clipy even better? We're all ears and always looking to improve.
+                    Have an idea that would make Clipy even better? We&apos;re all ears and always looking to improve.
                   </p>
                 </div>
                 
