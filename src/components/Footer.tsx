@@ -1,305 +1,159 @@
 "use client";
 
-import * as React from "react";
-import { Facebook, Github, Instagram, Twitter, /* Linkedin */ } from "lucide-react";
-import { cn } from "../lib/utils";
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Github, Linkedin, Twitter, Mail, ArrowUp } from "lucide-react";
 
-// Button component - simplified version for the footer
-const Button = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    variant?: "default" | "secondary" | "outline";
-    size?: "default" | "sm" | "lg" | "icon";
-    asChild?: boolean;
-  }
->(({ className, variant = "default", size = "default", ...props }, ref) => {
-  const variantClasses = {
-    default: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
-    outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-    secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+const footerLinks = [
+  {
+    title: "Product",
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "Download", href: "#download" },
+      { label: "Roadmap", href: "#roadmap" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Documentation", href: "#docs" },
+      { label: "Tutorial", href: "#tutorial" },
+      { label: "FAQs", href: "#faqs" },
+      { label: "Support", href: "#support" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "#about" },
+      { label: "Blog", href: "#blog" },
+      { label: "Careers", href: "#careers" },
+      { label: "Contact", href: "#contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy", href: "#privacy" },
+      { label: "Terms", href: "#terms" },
+      { label: "Cookie Policy", href: "#cookies" },
+      { label: "Licenses", href: "#licenses" },
+    ],
+  },
+];
+
+const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const sizeClasses = {
-    default: "h-9 px-4 py-2",
-    sm: "h-8 rounded-md px-3 text-xs",
-    lg: "h-10 rounded-md px-8",
-    icon: "h-9 w-9",
-  };
-
+  
   return (
-    <button
-      className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-        variantClasses[variant],
-        sizeClasses[size],
-        className
-      )}
-      ref={ref}
-      {...props}
-    />
-  );
-});
-Button.displayName = "Button";
-
-// Form components
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // Required placeholder property to avoid empty interface error
-  placeholder?: string;
-}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <input
-        className={cn(
-          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Input.displayName = "Input";
-
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  // Required placeholder property to avoid empty interface error
-  placeholder?: string;
-}
-
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <textarea
-        className={cn(
-          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Textarea.displayName = "Textarea";
-
-// Footer component
-interface ContactFormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
-interface FooterProps {
-  className?: string;
-}
-
-const Footer: React.FC<FooterProps> = ({ className }) => {
-  const [formData, setFormData] = React.useState<ContactFormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setErrorMessage("");
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
-      }
-      
-      // Success
-      setIsSuccess(true);
-      setFormData({ name: "", email: "", message: "" });
-      
-      // Reset success state after 5 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 5000);
-    } catch (error) {
-      setErrorMessage(error instanceof Error 
-        ? error.message 
-        : "Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const socialLinks = [
-    {
-      icon: <Twitter className="h-5 w-5" />,
-      href: "https://twitter.com/yourusername",
-      label: "Twitter",
-    },
-    {
-      icon: <Facebook className="h-5 w-5" />,
-      href: "https://facebook.com/yourpage",
-      label: "Facebook",
-    },
-    {
-      icon: <Instagram className="h-5 w-5" />,
-      href: "https://instagram.com/yourusername",
-      label: "Instagram",
-    },
-    {
-      icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/yourusername",
-      label: "GitHub",
-    },
-    // You can add more social icons by importing them from lucide-react
-    // Example for LinkedIn:
-    // {
-    //   icon: <Linkedin className="h-5 w-5" />,
-    //   href: "https://linkedin.com/in/yourprofile",
-    //   label: "LinkedIn",
-    // },
-  ];
-
-  const legalLinks = [
-    { href: "/privacy", label: "Privacy Policy" }, // Update with the correct URL to your privacy policy
-    { href: "/terms", label: "Terms of Service" }, // Update with the correct URL to your terms of service
-    // You can add more links here, for example:
-    // { href: "/cookies", label: "Cookie Policy" },
-  ];
-
-  return (
-    <footer className={cn("bg-background pb-6 pt-16 lg:pb-8 lg:pt-24", className)}>
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-16">
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">
-              We&apos;d Love to Hear From You!
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Have suggestions or feature requests? Let us know!
-            </p>
-            
-            <div className="flex space-x-4">
-              {socialLinks.map((link, i) => (
-                <Button
-                  key={i}
-                  variant="secondary"
-                  size="icon"
-                  className="h-10 w-10 rounded-full"
-                  type="button"
-                  onClick={() => window.open(link.href, "_blank")}
-                  aria-label={link.label}
-                >
-                  {link.icon}
-                </Button>
-              ))}
-            </div>
-          </div>
-          
-          <div className="space-y-6">
-            {isSuccess ? (
-              <div className="rounded-md bg-primary/10 p-6 text-center">
-                <h3 className="mb-2 text-lg font-medium">Thank you for your message!</h3>
-                <p className="text-muted-foreground">We&apos;ll get back to you as soon as possible.</p>
+    <footer className="bg-secondary/10 border-t border-border">
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+          {/* Logo and Company Info */}
+          <motion.div 
+            className="col-span-2 md:col-span-1 space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link href="/" className="inline-block">
+              <div className="text-xl font-bold text-primary flex items-center">
+                <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground mr-2">C</span>
+                Clipy
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder="Your message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </div>
-                {errorMessage && (
-                  <div className="text-sm text-destructive">{errorMessage}</div>
-                )}
-                <Button 
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="mr-2 h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Submitting...
-                    </>
-                  ) : (
-                    "Submit"
-                  )}
-                </Button>
-              </form>
-            )}
-          </div>
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              Smart clipboard management for modern productivity. Never lose what you copy again.
+            </p>
+            <div className="flex space-x-4 text-muted-foreground">
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-primary transition-colors duration-200"
+              >
+                <Github className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </a>
+              <a 
+                href="https://twitter.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-primary transition-colors duration-200"
+              >
+                <Twitter className="h-5 w-5" />
+                <span className="sr-only">Twitter</span>
+              </a>
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-primary transition-colors duration-200"
+              >
+                <Linkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+              <a 
+                href="mailto:info@clipy.app" 
+                className="hover:text-primary transition-colors duration-200"
+              >
+                <Mail className="h-5 w-5" />
+                <span className="sr-only">Email</span>
+              </a>
+            </div>
+          </motion.div>
+          
+          {/* Footer Links */}
+          {footerLinks.map((section, i) => (
+            <motion.div 
+              key={section.title}
+              className="flex flex-col space-y-3"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 * (i + 1) }}
+            >
+              <h3 className="font-medium">{section.title}</h3>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <a 
+                      href={link.href} 
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
         
-        <div className="mt-12 border-t border-border pt-8">
-          <div className="flex flex-col justify-between space-y-4 md:flex-row md:items-center md:space-y-0">
-            <div className="text-sm text-muted-foreground">
-              <div>© 2025 Clipy. All rights reserved.</div>
-            </div>
-            
-            <ul className="flex flex-wrap gap-4">
-              {legalLinks.map((link, i) => (
-                <li key={i}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground underline-offset-4 hover:underline"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        <motion.div 
+          className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <div className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Clipy. All rights reserved.
           </div>
-        </div>
+          
+          <button
+            onClick={scrollToTop}
+            className="p-2 rounded-full border border-border hover:border-primary hover:bg-primary/10 transition-colors duration-200"
+          >
+            <ArrowUp className="h-4 w-4 text-muted-foreground hover:text-primary transition-colors duration-200" />
+            <span className="sr-only">Scroll to top</span>
+          </button>
+        </motion.div>
       </div>
     </footer>
   );

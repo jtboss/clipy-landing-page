@@ -1,10 +1,8 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-// Initialize Resend with your API key
-// Replace this with your actual API key in production
-// Using a placeholder for now - you'll need to set up environment variables
-const resend = new Resend(process.env.RESEND_API_KEY || 'test_api_key');
+// Initialize Resend with your API key from environment variable
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validate email format
 function isValidEmail(email: string): boolean {
@@ -42,40 +40,56 @@ export async function POST(request: Request) {
     console.log(`New subscription: ${name} (${email})`);
     
     // Send confirmation email
-    // In development, this might not work without a real API key
-    if (process.env.RESEND_API_KEY) {
-      try {
-        const data = await resend.emails.send({
-          from: 'Clipy <onboarding@resend.dev>',
-          to: email,
-          subject: 'Welcome to Clipy! You\'re on the list for early access.',
-          html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-              <h1 style="color: #333; font-size: 24px;">Hi ${name},</h1>
-              <p style="color: #555; font-size: 16px; line-height: 1.5;">
-                Thanks for signing up for early access to Clipy. We'll notify you when we launch.
-              </p>
-              <p style="color: #555; font-size: 16px; line-height: 1.5;">
-                Stay tuned!
-              </p>
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 14px;">
-                <p>The Clipy Team</p>
-              </div>
+    try {
+      // 1. Send confirmation email to the user
+      await resend.emails.send({
+        from: 'Clipy <onboarding@resend.dev>',
+        to: email,
+        subject: 'Welcome to Clipy! You\'re on the list for early access.',
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #333; font-size: 24px;">Hi ${name},</h1>
+            <p style="color: #555; font-size: 16px; line-height: 1.5;">
+              Thank you for joining the Clipy waitlist! We're thrilled to have you on board.
+            </p>
+            <p style="color: #555; font-size: 16px; line-height: 1.5;">
+              We're working hard to build a clipboard manager that will change the way you work. 
+              You'll be among the first to know when Clipy launches.
+            </p>
+            <p style="color: #555; font-size: 16px; line-height: 1.5;">
+              Stay tuned for updates!
+            </p>
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 14px;">
+              <p>The Clipy Team</p>
             </div>
-          `,
-        });
-        
-        console.log('Email sent:', data);
-      } catch (emailError) {
-        console.error('Error sending email:', emailError);
-        return NextResponse.json(
-          { error: 'There was an issue sending the confirmation email. Please try again later.' },
-          { status: 500 }
-        );
-      }
-    } else {
-      // Log if we're in development mode without an API key
-      console.log('Development mode: Email would be sent to', email);
+          </div>
+        `,
+      });
+      
+      // 2. Send notification email to the admin
+      await resend.emails.send({
+        from: 'Clipy <onboarding@resend.dev>',
+        to: process.env.ADMIN_EMAIL || 'hey.jjedwards@gmail.com',
+        subject: 'New Clipy Waitlist Signup',
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #333; font-size: 24px;">New Waitlist Signup</h1>
+            <p style="color: #555; font-size: 16px;"><strong>Name:</strong> ${name}</p>
+            <p style="color: #555; font-size: 16px;"><strong>Email:</strong> ${email}</p>
+            <p style="color: #555; font-size: 16px; line-height: 1.5; margin-top: 20px;">
+              A new user has joined the Clipy waitlist.
+            </p>
+          </div>
+        `,
+      });
+      
+      console.log('Emails sent successfully to user and admin');
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      return NextResponse.json(
+        { error: 'There was an issue sending the confirmation email. Please try again later.' },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ 

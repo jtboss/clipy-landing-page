@@ -1,0 +1,62 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+# Your rule content
+
+Establish the following project rules for the Clipy landing page, incorporating Magic UI for consistent styling:
+
+1. **Code Readability & Structure:**
+   - Use clear, descriptive names for variables, functions, and components.
+   - Maintain consistent indentation (2 spaces per level).
+   - Keep code modular by creating reusable components for repetitive sections (e.g., buttons, sections).
+   - Ensure components are built using Magic UI components where applicable (e.g., buttons, input fields, modals).
+
+2. **Styling (Magic UI + Tailwind CSS):**
+   - Use Magic UI for all base component styling (e.g., buttons, inputs, cards) and avoid inline styles.
+   - Tailwind CSS should be used to handle layout and utility-based styling (e.g., `flex`, `grid`, `m-4`).
+   - Follow Magic UI's color scheme, ensuring consistency across the page (primary colors, background, text).
+   - Make use of Magic UI's pre-built components like `Button`, `Input`, `Card`, etc.
+
+3. **Performance:**
+   - Lazy-load images and other assets to enhance page load time.
+   - Ensure performance optimization by using Tailwind’s responsive utilities and Magic UI's lightweight components.
+
+   
+   - Avoid using too many third-party libraries unless essential, as Magic UI already provides many components.
+
+4. **Error Handling & Debugging:**
+   - Implement basic error handling for form submissions using Magic UI's built-in error messages or custom ones.
+   - Log critical issues in the console during development and ensure smooth UX even with potential errors.
+
+5. **Consistency:**
+   - Ensure that all components (buttons, inputs, text) follow Magic UI's consistent design patterns.
+   - Use Magic UI's color palette and typography settings for a cohesive look and feel throughout the page.
+
+6. **Component Organization:**
+   - Store reusable components (e.g., header, footer, buttons, forms) in the `/components` directory.
+   - Create dedicated directories for Magic UI-based components and utilities, such as `/magic-ui-components`.
+
+7. **No Hardcoding:**
+   - Avoid hardcoding data directly into the UI. Use variables, props, or state management to dynamically load content.
+   - Ensure any forms or user interactions (e.g., waitlist signup) are handled via state management and API calls.
+
+8. **Accessibility (Magic UI Considerations):**
+   - Ensure accessibility using Magic UI’s accessible components, such as providing proper `aria-labels` for interactive elements.
+   - Implement keyboard navigability and ensure that the site works well with screen readers.
+
+9. **Version Control:**
+   - Commit changes regularly to GitHub with descriptive messages.
+   - Use Git branches for new features or fixes before merging into `main`.
+
+10. **Deployment:**
+    - Ensure that environment variables are handled securely using `.env.local` for development and configured on Vercel for production.
+    - Test the live deployment on Vercel to ensure everything works correctly.
+
+Following these rules will ensure that the Clipy landing page remains clean, functional, and consistent, while leveraging Magic UI's components for an optimized user experience and modern design.
