@@ -29,7 +29,7 @@ const ContactSection = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              We'd Love to Hear From You
+              We&apos;d Love to Hear From You
             </motion.h2>
             
             <motion.p 
