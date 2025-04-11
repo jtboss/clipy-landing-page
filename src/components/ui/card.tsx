@@ -1,7 +1,9 @@
 import React from "react";
 import { cn } from "../../lib/utils";
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> { }
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: string;
+}
 
 export function Card({ className, ...props }: CardProps) {
   return (
@@ -15,7 +17,9 @@ export function Card({ className, ...props }: CardProps) {
   );
 }
 
-export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> { }
+export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  compact?: boolean;
+}
 
 export function CardHeader({ className, ...props }: CardHeaderProps) {
   return (
@@ -44,7 +48,9 @@ export function CardTitle({ className, level = 3, ...props }: CardTitleProps) {
   );
 }
 
-export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> { }
+export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  truncate?: boolean;
+}
 
 export function CardDescription({ className, ...props }: CardDescriptionProps) {
   return (
@@ -55,13 +61,17 @@ export function CardDescription({ className, ...props }: CardDescriptionProps) {
   );
 }
 
-export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> { }
+export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  padded?: boolean;
+}
 
 export function CardContent({ className, ...props }: CardContentProps) {
   return <div className={cn("p-6 pt-0", className)} {...props} />;
 }
 
-export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> { }
+export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  bordered?: boolean;
+}
 
 export function CardFooter({ className, ...props }: CardFooterProps) {
   return (

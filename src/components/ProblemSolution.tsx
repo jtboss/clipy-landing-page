@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Check, X, Clipboard, Lightbulb, AlertTriangle, ArrowDown, CheckCircle } from "lucide-react";
 
 const containerVariants = {

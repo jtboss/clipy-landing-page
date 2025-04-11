@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Monitor, Smartphone, Search, Clock, History, Share2, MessageSquare, Clipboard, Key, ArrowRight } from "lucide-react";
 
@@ -54,10 +54,6 @@ const additionalFeatures = [
 ];
 
 const KeyFeatures = () => {
-  const [activeFeature] = useState(features[0].id);
-  
-  const activeFeatureObj = features.find(feature => feature.id === activeFeature);
-
   return (
     <section id="key-features" className="py-24 bg-gradient-to-b from-background via-background/50 to-background">
       <div className="container mx-auto px-4 md:px-6">
