@@ -128,21 +128,6 @@ export default function Home() {
                   Be among the first to try Clipy and get exclusive features before anyone else!
                 </p>
               </motion.div>
-              
-              <motion.div
-                className="flex items-center mt-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <motion.button
-                  whileHover={{ scale: 1.02, backgroundColor: "var(--secondary-hover)" }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-10 px-6 bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-all"
-                >
-                  Learn More
-                </motion.button>
-              </motion.div>
             </div>
             
             {/* Hero Image/Illustration - Enhanced with animation */}
